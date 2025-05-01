@@ -1,0 +1,73 @@
+import logo from './logo.svg';
+import './App.css';
+import { useState } from "react";
+
+function App(){
+  const [x,setX] = useState(0)
+  const [y,setY] = useState(0)
+  const [z,setZ] = useState(0)
+
+  function handlex(e){
+setX(e.target.value)
+  }
+  function handley(e){
+    setY(e.target.value)
+
+  }
+  function Addition (){
+   
+setZ(parseInt(x) + parseInt(y) )
+  }
+  function Subtraction (){
+    setZ(parseInt(x) - parseInt(y) )   
+  }
+  function Division (){
+    setZ(parseInt(x) / parseInt(y) )   
+  }
+  function Multiplication  (){
+    setZ(parseInt(x) * parseInt(y) )   
+  }
+  function  Modulus  (){
+    setZ(parseInt(x) % parseInt(y) )   
+  }
+//   function one(){
+// setX("1")
+// setY("1")
+//   }
+// function  two(){
+//   if( x|| y == " "){
+//   setX(" 2")
+//   setY("2") 
+//  }
+
+
+return(
+<>
+
+<h1> Calculator</h1>
+<div>
+<h1>X ={x} Y= {y}</h1>  
+Enter X = <input type ="text" name = "t1" id="t1" value ={x} onChange={handlex}/> 
+Enter Y = <input type ="text" name = "t2" id="t2" value ={y} onChange={handley}/>
+<br/><br/>
+Result = {z}
+<br/><br/>
+<input type ="button" onClick={Addition } value="Addition "/>
+<input type ="button" onClick={Subtraction } value="Subtraction "/>
+<input type ="button" onClick={Division } value="Division "/>
+<input type ="button" onClick={Multiplication  } value="Multiplication  "/>
+<input type ="button" onClick={ Modulus } value="Modulus   "/>
+<br/><br/>
+
+{/* <button className="btn" onClick={one} id ="1" > 1</button>
+<button className="btn" onClick={two} id ="2" > 2</button> */}
+
+</div>
+</>
+);
+}
+
+
+
+export default App;
+
