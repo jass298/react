@@ -1,0 +1,123 @@
+import logo from './logo.svg';
+import './App.css';
+import { useState } from "react";
+  
+
+
+function App() {
+
+const [ userName,setname] = useState();
+const [ balance,setbalance] =useState();
+const [accountno,setno] =useState();
+const [showInfo, setShowinfo] = useState();
+const [ deposit , setdeposit] = useState ( );
+const [ newbal , setnewbal] = useState ( );
+const [ withdraw , setWithdraw] = useState();
+
+function namefun(e){
+  setname(e.target.value)
+}
+
+function balancefun(e){
+  setbalance(e.target.value)
+}
+
+function nofun(e){
+  setno(e.target.value);
+}
+
+
+function saveInfo(){
+  const info = (` The user name is =${userName},Account no.=${accountno} and balance =${balance}`);
+ console.log(info)
+
+}
+
+function showdetailfun(e){
+  const info = (` Username =${userName }, Account no.=${ accountno }  Balance =${ balance }`);
+  console.log(info)
+  setShowinfo(info);
+  setname(" ");
+setno(" ");
+  
+} 
+function depositfun(e){
+ setdeposit(e.target.value)
+//  setdeposit(parseInt(balance) + parseInt(deposit))
+
+}
+function depositadd (e){
+
+  const updatedBalance = (parseInt(deposit) + parseInt(balance) )
+  setbalance(updatedBalance); 
+  console.log(updatedBalance)
+  setdeposit("");
+  
+  // console.log( deposit)
+  // console.log(newbal)
+}
+
+//withdraw
+
+function withdrawfun(e){
+  setWithdraw(e.target.value)
+
+ }
+ function withdrawcut (e){
+ 
+   const cuttedbalance = (parseInt(balance) - parseInt(withdraw) )
+   setbalance(cuttedbalance); 
+   console.log(cuttedbalance)
+   setWithdraw("");
+   
+   // console.log( deposit)
+   // console.log(newbal)
+ }
+
+    return (
+      <>
+        <h1>Second task</h1>
+        <br/><br/>
+        <div>
+       <h4>  Enter Account information here :</h4>
+
+userName:<input type="text" onChange={namefun} value={userName}  />
+<br/>
+Add Balance:<input type="text" onChange={balancefun} value={balance}/>
+<br/>
+Account no:<input type="text" onChange={nofun} value={accountno} />
+<br/>
+Deposit:<input type ="text"  id="t1" value ={deposit} onChange={depositfun}/>
+<button onClick={depositadd}>add</button>
+<br/>
+Withdraw:<input type ="text"  id="t2" value ={withdraw} onChange={withdrawfun}/>
+<button onClick={withdrawcut}>cut</button>
+
+        <br/><br />
+          <button  onClick={saveInfo}> Set acccount</button>
+          <br /><br />
+          <button  onClick={showdetailfun} > Show detail</button>
+          <br/><br/>
+          
+
+          {/* <input type="button" value={Withdraw} /> */} 
+        
+    { deposit  && <p>deposit balance:{deposit}</p>}
+  <p>Total balance is:{deposit + balance}</p>
+  <p>After withdrawing ,the balance is:{balance - withdraw}</p>
+     {showInfo && <p>{showInfo}</p>}
+
+        
+        </div>
+
+      </>
+
+    );
+
+  }
+  export default App;
+
+
+
+
+ 
