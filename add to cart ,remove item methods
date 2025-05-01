@@ -1,0 +1,79 @@
+# react
+
+
+import React, { useEffect, useState } from 'react';
+
+const MyListPractice = () => {
+  const [data, setData] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((response) => response.json())
+      .then((items) => setData(items.products));
+  }, []);
+
+  function addcartItem(item) {
+    setCart(prev => [...prev, item]);
+    console.log(cart);
+ 
+  }
+
+  const removeItem = (id) =>{
+    console.log(id)
+    setCart(cart.filter(item => item.id !== id));
+  
+  }
+  // function removeItem(e){
+    // }   
+  
+  return (
+    <>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th><th>Category</th><th>Brand</th><th>Price</th><th>Add to Cart</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((val) => (
+            <tr key={val.id}>
+              
+              <td><img src={val.images[0]} width="100" height="100"/></td>
+              <td>{val.title}</td>
+              <td>{val.category}</td>
+              <td>{val.brand}</td>
+              <td>{val.price}</td>    
+              <td><button onClick={() => addcartItem(val)}>Add to Cart</button></td>
+            
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h2>Cart items is here</h2>
+      <table border="1">
+        <thead>
+          <tr>
+          <th>Image</th><th>Name</th><th>Category</th><th>Brand</th><th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cart.map((item) => (
+            <tr key={item.id}>
+                  <td><img src={item.images[0]} width="100" height="100"/></td>
+              <td>{item.title}</td>
+              <td>{item.category}</td>
+              <td>{item.brand}</td>
+              <td>{item.price}</td>
+              <button onClick={() => removeItem(item.id)}><th>Delete</th></button>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+
+  );
+};
+
+export default MyListPractice;
