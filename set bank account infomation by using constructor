@@ -1,1 +1,91 @@
+import logo from './logo.svg';
+import './App.css';
+import React from 'react'
+
+
+class Bank extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: " ", accno: " ", balance: " ",
+      show: false,
+      deposit: " ",
+      withdraw: " "
+    };
+  };
+  handleUsername = (e) => {
+    this.setState({ username: e.target.value })
+  }
+  handleaccno = (e) => {
+    this.setState({ accno: e.target.value })
+  }
+  handlebalance = (e) => {
+    this.setState({ balance: e.target.value })
+  }
+  show = () => {
+    this.setState({ show: true })
+    console.log(`name = ${this.state.username} account number = ${this.state.accno} balance = ${this.state.balance}`);
+  }
+  handledeposit = (e) => {
+    this.setState({ deposit: e.target.value })
+  }
+  depositadd = (e) => {
+    let updatebalance = (parseInt(this.state.balance) + parseInt(this.state.deposit))
+    this.setState({ balance: updatebalance, deposit: "" })
+    console.log(updatebalance)
+  }
+  handlewithdraw = (e) => {
+    this.setState({ withdraw: e.target.value })
+  }
+  withdrawcut = (e) => {
+    let cutbalance = (parseInt(this.state.balance) - parseInt(this.state.withdraw))
+    this.setState({ balance: cutbalance, withdraw: "" })
+    console.log(cutbalance)
+  }
+
+  render() {
+    return (
+      <>
+        <h1>Enter your account information👇</h1>
+
+        User Name:<input type="text" onChange={this.handleUsername} value={this.state.username} /><br />
+        Account no:<input type="text" onChange={this.handleaccno} value={this.state.accno} /><br />
+        Balance : <input type="text" onChange={this.handlebalance} value={this.state.balance} />
+        <br />
+
+        <button onClick={this.show}>show</button>
+        <br />
+        {this.state.show && (
+
+          <div style={{ border: '1px solid gray', padding: '10px', marginTop: '20px' }}>
+            <p>Name : {this.state.username}</p>
+            <p>Account no : {this.state.accno}</p>
+            <p>balance : {this.state.balance}</p>
+          </div>
+        )}
+        Deposit:<input type="text" id="t1" onChange={this.handledeposit} value={this.state.deposit} />
+        <button onClick={this.depositadd} >Deposit</button>
+        Withdraw:<input type="text" id="t2" onChange={this.handlewithdraw} value={this.state.withdraw} />
+        <button onClick={this.withdrawcut}>Withdraw</button>
+      </>
+    );
+  }
+}
+export default Bank;
+
+// username = () => {
+//   console.log(`You set name: ${this.state.username}`);
+// };
+// accno = () => {
+//   console.log(`You set account number: ${this.state.accno}`);
+// };
+// balance = () => {
+//   console.log(`You set balance: ${this.state.balance}`);
+// };
+
+
+
+
+
 
