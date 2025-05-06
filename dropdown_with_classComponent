@@ -1,0 +1,51 @@
+import logo from './logo.svg';
+import './App.css';
+import React from 'react'
+
+class Country extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            country: " ",
+            show: false
+        };
+    };
+    handlecountry = (e) => {
+        this.setState({ country: e.target.value })
+    }
+    show = (e) => {
+        this.setState({ show: true })
+        console.log(`country = ${this.state.country} `);
+    }
+
+    render() {
+        return (
+            <>
+                <h1>Select country👇</h1>
+                <select id="country" onChange={this.handlecountry}>
+                <option value="Germany">Germany</option>
+                    <option value="India" >India</option>
+                    <option value="Pakistan" >Pakistan</option>
+                    <option value="Canada" >Canada</option>
+                    <option value="Spain" >Spain</option>
+                    <option value="America"></option>
+                </select>
+
+                <button onClick={this.show}>show</button>
+
+                {this.state.show && this.state.country && (
+                    <div style={{ border: '1px solid gray', padding: '10px', marginTop: '20px' }}>
+                        <p>You have selected : {this.state.country}</p>
+                    </div>
+                )}
+            </>
+        );
+    }
+}
+export default Country;
+
+// value={this.state.country}
+// ["India", "Pakistan", "Canada", "Spain", "America", "Netherland"]
+
+
