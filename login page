@@ -1,0 +1,30 @@
+
+import { useState } from "react"
+import { useNavigate } from "react-router-dom";
+import MyNavbar from "./Navbar";
+
+function Login() {
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate(); 
+    function handleChange(e) {
+        setUser(e.target.value)
+    }
+    function handleChange2(e) {
+        setPassword(e.target.value)
+    }
+    function handleSubmit(){
+        setUser('');
+        setPassword('')
+        navigate('/');
+    }
+    return (
+        <>
+        <MyNavbar/>
+            Username<input type="text" value={user} onChange={handleChange} />
+            Password<input type="text" value={password} onChange={handleChange2} />
+            <button onClick={handleSubmit}>Login</button>
+        </>
+    )
+}
+export default Login
