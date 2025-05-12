@@ -1,0 +1,127 @@
+import React, { useEffect, useState } from 'react'
+// import './Product.css';
+
+
+function Product() {
+
+    const [name, setName] = useState("");
+    const [id, setId] = useState(" ");
+    const [quantity, setQuantity] = useState("");
+    const [price, setPrice] = useState("");
+    const [storedarr, setStoredarr] = useState([""]);
+    const [arr, setArr] = useState([""]);
+
+    function handlename(e) {
+        setName(e.target.value);
+    }
+    function handleid(e) {
+        setId(e.target.value);
+    }
+    function handlequantity(e) {
+        setQuantity(e.target.value);
+    }
+    function handleprice(e) {
+        setPrice(e.target.value);
+    }
+    //useeffect 2nd way
+    useEffect(() => {
+        var storddata = JSON.parse(localStorage.getItem("myArray")) || [];
+        console.log(storddata);
+        setArr(storddata)
+    }, []);
+    function handleSubmit() {
+
+        // 1st way
+
+        // const newProduct = {
+        //     name,
+        //     id,
+        //     quantity,
+        //     price
+        // };
+        // setArr(prev => [...prev, newProduct]);
+        // const updatedArr = [...arr, newProduct];
+        // setArr(updatedArr);
+        // localStorage.setItem("myArray", JSON.stringify(updatedArr));
+        // setStoredarr(updatedArr);
+        // setName(" ");
+        // setId(" ")
+        // setQuantity(" ")
+        // setPrice(" ")
+
+
+        //2nd way
+
+        const obj = { name, id, quantity, price }
+        const updatedArr = [...arr, obj];
+        setArr(updatedArr);
+        console.log(arr)
+
+        const localarr = localStorage.setItem("myArray", JSON.stringify(updatedArr))
+        console.log(localarr);
+
+        setName(" ");
+        setId(" ")
+        setQuantity(" ")
+        setPrice(" ")
+
+    }
+
+
+    return (
+
+        <>
+            <h1>Fill the  Product detail below👇</h1>
+            Name : <input type="text" value={name} onChange={handlename} />
+            Id : <input type="text" value={id} onChange={handleid} />
+            Quantity : <input type="text" value={quantity} onChange={handlequantity} />
+            Price : <input type="text" value={price} onChange={handleprice} />
+
+            <button onClick={handleSubmit}>Submit</button>
+
+            <h3>Data in Table form</h3>
+            <div border="1">
+                <table border="1">
+                    <thead>
+
+                        <tr>
+                            <th>Name</th> <th>Id</th> <th>Quantity</th> <th>Price</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        {/* 1st way */}
+
+                        {/* {
+       storedarr.map((val,index)=>(
+      <tr  key={index}> 
+         <td>{val.name}</td>  
+      <td>{val.id}</td>
+      <td>{val.quantity}</td>
+      <td>{val.price}</td>
+
+      </tr>
+       ))
+    //    } */}
+
+
+                        {/* 2nd way */}
+                        {
+                            arr.map((val, index) => (
+                                <tr key={index}>
+                                    <td>{val.name}</td>
+                                    <td>{val.id}</td>
+                                    <td>{val.quantity}</td>
+                                    <td>{val.price}</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </>
+    )
+}
+
+export default Product;
