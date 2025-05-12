@@ -6,7 +6,7 @@ import MyNavbar from "./Navbar";
 function Login() {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate(); //to navigate page
     function handleChange(e) {
         setUser(e.target.value)
     }
